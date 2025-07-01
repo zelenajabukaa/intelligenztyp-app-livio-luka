@@ -1,5 +1,8 @@
 "use client";
-
+/*
+ * Einfache Startseite für unseren Intelligenztest
+ * Zeigt Titel, Beschreibung und Startbutton
+ */
 export default function Home() {
   return (
     <div className="container">

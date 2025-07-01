@@ -5,8 +5,8 @@ import React, { useState } from "react";
 // Fragenkatalog
 const fragenKatalog = [
     {
-        typ: "Linguistische Intelligenz",
-        icon: "📝",
+        typ: "Linguistische Intelligenz",// Intelligenztyp oder auch der Titel des Katalogs
+        icon: "📝",// ein Kleines Icon, damit es schöner für die Augen ist
         fragen: [
             "Ich kann meine Gedanken klar und verständlich in Worten ausdrücken.",
             "Ich lese gerne Bücher, Artikel oder Texte in meiner Freizeit.",
@@ -68,9 +68,9 @@ const fragenKatalog = [
         typ: "Intrapersonelle Intelligenz",
         icon: "🧠",
         fragen: [
-            "Ich reflektiere regelmäßig über meine Ziele und Motivationen.",
+            "Ich reflektiere regelmässig über meine Ziele und Motivationen.",
             "Meine Stärken und Schwächen kenne ich sehr gut.",
-            "Ich brauche regelmäßig Zeit für mich allein zum Nachdenken.",
+            "Ich brauche regelmässig Zeit für mich allein zum Nachdenken.",
             "Bei wichtigen Entscheidungen höre ich auf mein Bauchgefühl.",
         ],
     },
@@ -86,55 +86,60 @@ const fragenKatalog = [
     },
 ];
 
+//Diese Funktion berechnet den Fortschritt in %, also 56% z.B
 function getProgress(step, totalSteps) {
     return Math.round((step / totalSteps) * 100);
 }
 
 export default function QuizPage() {
     const router = useRouter();
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(0);//Speichert bei welchem Schritt man gerade ist (z.B Schritt 3 von 8).
     const [answers, setAnswers] = useState(
-        Array(8)
+        Array(8)//es gibt 8 Gruppen mit je 4 Antworten (also 8x4 Felder).
             .fill(0)
             .map(() => Array(4).fill(3))
     );
 
-    const current = fragenKatalog[step];
-    const currentAnswers = answers[step];
+    const current = fragenKatalog[step];// Aktuelle Frage
+    const currentAnswers = answers[step];// Aktuelle Antwort
 
+    // wird aufgerufen, wenn bei einem Radiobutton Antwort geändert wird -- er speichert die Antwort
     function handleRadioChange(qIdx, value) {
         const copy = answers.map((arr) => arr.slice());
         copy[step][qIdx] = value;
         setAnswers(copy);
     }
 
+    //geht zum nächsten Schritt/Seite, solange noch nicht alle fertig sind.
     function handleNext() {
         if (step < 7) {
             setStep(step + 1);
         } else {
             router.push(
                 "/ergebnis?data=" + encodeURIComponent(JSON.stringify(answers))
-            );
+            );//beim letzten Schritt geht es zur Ergebnis Seite
         }
     }
-    function handleBack() {
+    function handleBack() {//geht einen Schritt zurück
         if (step > 0) setStep(step - 1);
     }
 
-    const progress = getProgress(step + 1, 8);
+    const progress = getProgress(step + 1, 8);//zeigz den Fortschritt in % an
 
     return (
         <div className="quiz-container">
-            <div className="progress-row">
+            <div className="progress-row">// Fortschritt wird hier angezeigt
                 <div className="progress-bar">
                     <div className="progress" style={{ width: `${progress}%` }} />
                 </div>
                 <span className="schritt">Schritt {step + 1}/8</span>
             </div>
             <div className="kategorie">
-                <span style={{ fontSize: 28 }}>{current.icon}</span> {current.typ}
+                <span style={{ fontSize: 28 }}>{current.icon}</span> {current.typ}//zeigt das Icon und den Namen des aktuellen Intelligenztyps (Beispiel: 🧠 Sprachlich).
+
+
             </div>
-            <div className="fragenblock">
+            <div className="fragenblock">// Frage mit 5 Antworten, man kann nur eine auswählen
                 {current.fragen.map((frage, qIdx) => (
                     <div key={qIdx} className="frage-block">
                         <div className="frage-text">{frage}</div>
@@ -163,10 +168,10 @@ export default function QuizPage() {
                 ))}
             </div>
             <div className="button-row">
-                <button onClick={handleBack} disabled={step === 0}>
+                <button onClick={handleBack} disabled={step === 0}>//Button zum zurückgehen
                     Zurück
                 </button>
-                <button onClick={handleNext}>
+                <button onClick={handleNext}>//Button zum weitergehen
                     {step < 7 ? "Weiter" : "Fertig"}
                 </button>
             </div>
