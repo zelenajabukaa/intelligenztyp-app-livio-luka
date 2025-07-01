@@ -128,18 +128,18 @@ export default function QuizPage() {
 
     return (
         <div className="quiz-container">
-            <div className="progress-row">// Fortschritt wird hier angezeigt
+            <div className="progress-row">{/* Fortschritt wird hier angezeigt*/}
                 <div className="progress-bar">
                     <div className="progress" style={{ width: `${progress}%` }} />
                 </div>
                 <span className="schritt">Schritt {step + 1}/8</span>
             </div>
             <div className="kategorie">
-                <span style={{ fontSize: 28 }}>{current.icon}</span> {current.typ}//zeigt das Icon und den Namen des aktuellen Intelligenztyps (Beispiel: 🧠 Sprachlich).
+                <span style={{ fontSize: 28 }}>{current.icon}</span> {current.typ}{/*zeigt das Icon und den Namen des aktuellen Intelligenztyps (Beispiel: 🧠 Sprachlich).*/}
 
 
             </div>
-            <div className="fragenblock">// Frage mit 5 Antworten, man kann nur eine auswählen
+            <div className="fragenblock">{/* Frage mit 5 Antworten, man kann nur eine auswählen*/}
                 {current.fragen.map((frage, qIdx) => (
                     <div key={qIdx} className="frage-block">
                         <div className="frage-text">{frage}</div>
@@ -168,10 +168,10 @@ export default function QuizPage() {
                 ))}
             </div>
             <div className="button-row">
-                <button onClick={handleBack} disabled={step === 0}>//Button zum zurückgehen
+                <button onClick={handleBack} disabled={step === 0}>{/*Button zum zurückgehen*/}
                     Zurück
                 </button>
-                <button onClick={handleNext}>//Button zum weitergehen
+                <button onClick={handleNext}>{/* Button zum weitergehen */}
                     {step < 7 ? "Weiter" : "Fertig"}
                 </button>
             </div>

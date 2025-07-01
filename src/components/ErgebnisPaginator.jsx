@@ -57,12 +57,12 @@ export default function ErgebnisPaginator({ kiText, scores }) {
                     <div key={typ}><b>{typ}:</b> {wert}</div>
                 ))}
             </div>
-            <div className="page-content" style={{ minHeight: 120, marginBottom: 20 }}>// hier wird der Text der aktuellen Seite angezeigt
+            <div className="page-content" style={{ minHeight: 120, marginBottom: 20 }}>{/* hier wird der Text der aktuellen Seite angezeigt*/}
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {pages[page]}
                 </ReactMarkdown>
             </div>
-            <div className="buttons" style={{ marginBottom: 16 }}>// hier sind die Buttons zum Blättern
+            <div className="buttons" style={{ marginBottom: 16 }}>{/* hier sind die Buttons zum Blättern*/}
                 <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>Zurück</button>
                 <span style={{ margin: "0 16px" }}>Seite {page + 1} / {pages.length}</span>
                 <button onClick={() => setPage(p => Math.min(pages.length - 1, p + 1))} disabled={page === pages.length - 1}>Weiter</button>
